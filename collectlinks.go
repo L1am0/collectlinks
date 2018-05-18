@@ -24,7 +24,7 @@ func All(httpBody io.Reader) []string {
 			return links
 		}
 		token := page.Token()
-		if tokenType == html.StartTagToken && token.DataAtom.String() == "a" {
+		if tokenType == html.StartTagToken && token.Data == "a" {
 			for _, attr := range token.Attr {
 				if attr.Key == "href" {
 					tl := trimHash(attr.Val)
@@ -33,7 +33,7 @@ func All(httpBody io.Reader) []string {
 				}
 			}
 		}
-		if tokenType == html.StartTagToken && token.DataAtom.String() == "img" {
+		if tokenType == html.StartTagToken && token.Data == "img" {
 			for _, attr := range token.Attr {
 				if attr.Key == "src" {
 					tl := trimHash(attr.Val)
