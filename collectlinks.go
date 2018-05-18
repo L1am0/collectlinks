@@ -33,6 +33,15 @@ func All(httpBody io.Reader) []string {
 				}
 			}
 		}
+		if tokenType == html.StartTagToken && token.DataAtom.String() == "img" {
+			for _, attr := range token.Attr {
+				if attr.Key == "src" {
+					tl := trimHash(attr.Val)
+					col = append(col, tl)
+					resolv(&links, col)
+				}
+			}
+		}
 	}
 }
 
